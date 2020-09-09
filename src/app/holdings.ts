@@ -5,6 +5,7 @@ export class Holdings {
     quantity: number;
     purchaseDate: Date;
     currentPrice: number;
+    initialValuation: number;
     currentValuation: number;
 
 

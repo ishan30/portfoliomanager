@@ -11,42 +11,27 @@ import { PortfolioDataService } from '../portfolio-data.service';
 })
 export class DataGridComponent implements OnInit {
 
-  public columns: any[] = [{field: 'ProductID'}, {field: 'ProductName'}, {field: 'QuantityPerUnit'}];
+  public columns: any[] = [{field: 'stockId'}, {field: 'stockName'},
+  {field: 'purchasePrice'}, {field: 'quantity'}, {field: 'purchaseDate'},
+  {field: 'currentPrice'}, {field: 'initialValuation'}, {field: 'currentValuation'}];
     public bindingType = 'array';
     public view: Observable<GridDataResult>;
     public gridData;
     // public gridDataResult: GridDataResult = {data: holdings, total: holdings.length};
     holdingSummaryData;
     constructor(private portfolioDataService: PortfolioDataService) {}
-    ngOnInit(): {
+
+    ngOnInit() {
       this.loadHoldingSummary();
     }
 
-loadHoldingSummary() : {
+    loadHoldingSummary(): any {
       this.holdingSummaryData = this.portfolioDataService.getStockHoldingData();
-    }
-changeBindingType(e): {
-      switch (this.bindingType) {
-        case 'array' : {
-          this.columns = [{field: 'ProductID'}, {field: 'ProductName'}, {field: 'QuantityPerUnit'}];
-          this.gridData = holdings;
-          break;
-        }
-        case 'gridDataResult' : {
-          this.columns = [{field: 'ProductID'}, {field: 'ProductName'}, {field: 'QuantityPerUnit'}];
-          this.gridData = this.gridDataResult;
-          break;
-        }
-        case 'async' : {
-          const state: State = {skip: 0, take: 100};
-          this.columns = [{field: 'CategoryID'}, {field: 'CategoryName'}, {field: 'Description'}];
-          this.service.query(state);
-          this.view.subscribe(res => {
-            this.gridData = res;
-            });
-          break;
-        }
-      }
+
+      this.columns = [{field: 'stockId'}, {field: 'stockName'},
+      {field: 'purchasePrice'}, {field: 'quantity'}, {field: 'purchaseDate'},
+      {field: 'currentPrice'}, {field: 'initialValuation'}, {field: 'currentValuation'}];
+      this.gridData = this.holdingSummaryData;
     }
 
 }
